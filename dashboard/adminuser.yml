@@ -1,0 +1,7 @@
+# create an admin user to access the dashboard
+# https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: admin-user
+  namespace: kubernetes-dashboard

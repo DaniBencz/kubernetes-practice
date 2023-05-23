@@ -1,20 +1,21 @@
 # to make it work locally
 # https://kubernetes.github.io/ingress-nginx/deploy/#docker-desktop
-apiVersion: networking.k8s.io/v1
 kind: Ingress
+apiVersion: networking.k8s.io/v1
 metadata:
-  name: myingress
+  name: demo-localhost
   labels:
-    name: myingress
+    name: demo-localhost
 spec:
+  ingressClassName: nginx
   rules:
-    # - host: <Host> # domain-based-routing
-    - http:
-        paths:
-          - pathType: Prefix
-            path: "/" # path-based-routing
-            backend:
-              service:
-                name: myservice
-                port:
-                  number: 80
+  - host: demo.localdev.me
+    http:
+      paths:
+        - pathType: Prefix
+          path: /
+          backend:
+            service:
+              name: demo-service
+              port:
+                number: 80

@@ -1,24 +1,26 @@
-apiVersion: apps/v1
 kind: Deployment
+apiVersion: apps/v1
 metadata:
-  name: mydeployment
+  name: demo
+  labels:
+    app: demo
+  annotations:
+    deployment.kubernetes.io/revision: '1'
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: mypod
-  template:
+      app: demo
+  template: # template for pods
     metadata:
       labels:
-        app: mypod
+        # the service will use this label to find the pods
+        app: demo
     spec:
       containers:
-        - name: mycontainer
-          image: nginx
+        - name: httpd
+          image: httpd
           ports:
-            - containerPort: 80
-            # - port: 4000
-            #   targetPort: 80
-          env:
-            - name: HELLO
-              value: hello
+          - containerPort: 80
+            # name is optional, to be used by the service
+            name: container-port

@@ -1,14 +1,16 @@
-apiVersion: v1
 kind: Service
+apiVersion: v1
 metadata:
-  name: myservice
-  # namespace: kiskutya
+  name: demo-service
+  labels:
+    app: demo # what is this?
 spec:
   # type defaults to ClusterIP
-  # type: LoadBalancer
   selector:
-    # calls pods, not deployments!
-    app: mypod
+    # calls pods by matching their label (not deployments)
+    app: demo
   ports:
-    - port: 80
+    - port: 80 # what is this?
       targetPort: 80
+      # alternatively port name of the app container, as defined in deployment.yml
+      # targetPort: container-port
